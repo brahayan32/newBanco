@@ -3,9 +3,9 @@ spring:
     name: banco
 
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/Transferencias
-    username: postgres
-    password: 123
+    url: r2dbc:postgresql://dpg-4d5l4k9k6d8rns7i3p0da2-a:5432/banco_db_39pd
+    username: banco_db_30pd_user
+    password: AaYGMlog8BoCwNF5qyfDRIAnKLp5jmRY
 
   sql:
     init:
@@ -16,4 +16,3 @@ server:
   error:
     include-message: always
     include-binding-errors: always
-    port: ${PORT:8080}  # usa el puerto de Render, 8080 por defecto si no existe
