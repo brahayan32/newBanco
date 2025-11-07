@@ -3,9 +3,11 @@ spring:
     name: banco
 
   r2dbc:
-    url: r2dbc:postgresql://dpg-4d5l4k9k6d8rns7i3p0da2-a:5432/banco_db_39pd
-    username: banco_db_30pd_user
-    password: AaYGMlog8BoCwNF5qyfDRIAnKLp5jmRY
+    url: ${DB_URL}
+      username: ${DB_USER}
+      password: ${DB_PASSWORD}
+      properties:
+        ssl: true
 
   sql:
     init:
