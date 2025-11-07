@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: banco
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/Transferencias
+    username: postgres
+    password: 123
+
+  sql:
+    init:
+      mode: always
+      platform: postgres
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    port: ${PORT:8080}  # usa el puerto de Render, 8080 por defecto si no existe
