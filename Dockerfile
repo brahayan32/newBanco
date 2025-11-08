@@ -1,14 +1,22 @@
-# Usa una imagen base con Java
-FROM eclipse-temurin:17-jdk
+# Usa una imagen base con Java y Gradle
+FROM gradle:8.4.1-jdk17 AS build
 
-# Crea un directorio para la app
+# Copia el proyecto completo al contenedor
+COPY . /app
 WORKDIR /app
 
-# Copia el .jar generado al contenedor
-COPY build/libs/banco-0.0.1-SNAPSHOT-plain.jar app.jar
+# Compila el proyecto sin ejecutar tests
+RUN gradle build -x test
 
-# Expone el puerto que usa tu app (ajústalo si usas otro)
+# Imagen final con solo el .jar
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+
+# Copia el .jar generado desde la etapa anterior
+COPY --from=build /app/build/libs/banco-0.0.1-SNAPSHOT.jar app.jar
+
+# Expone el puerto
 EXPOSE 8080
 
-# Comando para ejecutar la app
+# Ejecuta la app
 CMD ["java", "-jar", "app.jar"]
