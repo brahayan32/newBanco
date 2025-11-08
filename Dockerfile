@@ -1,5 +1,5 @@
 # Usa una imagen base con Java y Gradle
-FROM gradle:8.4.1-jdk17 AS build
+FROM gradle:8.4.0-jdk17 AS build
 
 # Copia el proyecto completo al contenedor
 COPY . /app
