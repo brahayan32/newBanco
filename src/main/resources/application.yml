@@ -4,9 +4,9 @@ spring:
 
   r2dbc:
     url: ${DB_URL}
-      username: ${DB_USER}
-      password: ${DB_PASSWORD}
-      properties:
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    properties:
         ssl: true
 
   sql:
