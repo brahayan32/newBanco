@@ -3,11 +3,10 @@ spring:
     name: banco
 
   r2dbc:
-    url: ${DB_URL}
+    url: ${DB_URL}?ssl=true
     username: ${DB_USER}
     password: ${DB_PASSWORD}
-    properties:
-        ssl: true
+
 
   sql:
     init:
@@ -18,3 +17,6 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
