@@ -5,7 +5,7 @@ spring:
   r2dbc:
     url: ${DB_URL:r2dbc:postgresql://localhost:5432/banco}
     username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:postgres}
+    password: ${DB_PASSWORD:123}
     pool:
       enabled: true
       initial-size: 5
