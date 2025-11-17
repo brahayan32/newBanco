@@ -3,20 +3,28 @@ spring:
     name: banco
 
   r2dbc:
-    url: ${DB_URL}?ssl=true
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-
+    url: ${DB_URL:r2dbc:postgresql://localhost:5432/banco}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 10
+      max-idle-time: 30m
 
   sql:
     init:
       mode: always
       platform: postgres
+      continue-on-error: false
 
 server:
+  port: ${PORT:8080}
   error:
     include-message: always
     include-binding-errors: always
 
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
+logging:
+  level:
+    io.r2dbc.postgresql: INFO
+    org.springframework.r2dbc: INFO
