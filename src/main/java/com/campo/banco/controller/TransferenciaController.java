@@ -6,6 +6,7 @@ import com.campo.banco.model.TransferenciaEntity;
 import com.campo.banco.service.TransferenciaIService;
 
 import jakarta.validation.Valid;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -21,5 +22,9 @@ public class TransferenciaController {
     @PostMapping
     public Mono<TransferenciaEntity> hacerTransferencia(@Valid @RequestBody TransferenciaDTO dto) {
         return servicio.transferir(dto);
+    }
+    @GetMapping
+    public Flux<TransferenciaEntity> listarTransferencias() {
+        return servicio.listar();
     }
 }
