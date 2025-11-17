@@ -1,30 +1,37 @@
 package com.campo.banco.controller;
-
-import org.springframework.web.bind.annotation.*;
-import com.campo.banco.dto.TransferenciaDTO;
 import com.campo.banco.model.TransferenciaEntity;
 import com.campo.banco.service.TransferenciaIService;
-
-import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/transferencias")
+@RequestMapping("/transferencias")
+@RequiredArgsConstructor
 public class TransferenciaController {
 
-    private final TransferenciaIService servicio;
+    private final TransferenciaIService transferenciaIService;
 
-    public TransferenciaController(TransferenciaIService servicio) {
-        this.servicio = servicio;
-    }
-
-    @PostMapping
-    public Mono<TransferenciaEntity> hacerTransferencia(@Valid @RequestBody TransferenciaDTO dto) {
-        return servicio.transferir(dto);
-    }
+    // ✔ GET listar transferencias
     @GetMapping
-    public Flux<TransferenciaEntity> listarTransferencias() {
-        return servicio.listar();
+    public Flux<TransferenciaEntity> listar() {
+        return transferenciaIService.listarTodas();
+    }
+
+    // ✔ GET buscar transferencia por ID
+    @GetMapping("/{id}")
+    public Mono<TransferenciaEntity> obtenerPorId(@PathVariable Long id) {
+        return transferenciaIService.buscarPorId(id);
+    }
+
+    // ✔ DELETE eliminar transferencia
+    @DeleteMapping("/{id}")
+    public Mono<Void> eliminar(@PathVariable Long id) {
+        return transferenciaIService.eliminar(id);
+    }
+    @PostMapping
+    public Mono<TransferenciaEntity> crear(@RequestBody TransferenciaEntity transferencia) {
+        return transferenciaIService.crearTransferencia(transferencia);
     }
 }
